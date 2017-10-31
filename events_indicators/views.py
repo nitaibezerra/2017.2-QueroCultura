@@ -124,6 +124,8 @@ def update_event_indicator():
     new_per_age_range = last_per_age_range.total_events_per_age_range
     new_temporal = last_temporal.total_events_registered_per_mounth_per_year
 
+    new_total = last_per_language.total_events
+
     for url in urls:
         request = RequestEventsRawData(str(last_per_language.create_date), url)
 
@@ -131,8 +133,9 @@ def update_event_indicator():
         new_per_age_range = build_age_range_indicator(request.data, new_per_age_range)
         new_temporal = build_temporal_indicator(request.data, new_temporal)
 
+        new_total += request.data_length
+
     new_create_date = datetime.now()
-    new_total = last_per_language.total_events + request.data_length
 
     PercentEventsPerLanguage(new_total, new_create_date, new_per_language).save()
     PercentEventsPerAgeRange(new_total, new_create_date, new_per_age_range).save()
