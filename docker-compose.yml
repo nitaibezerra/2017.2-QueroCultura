@@ -1,6 +1,10 @@
 version: '3'
 
 services:
+  metabase:
+    image: metabase/metabase
+    ports:
+      - "3000:3000"
   mongo:
     image: mongo
     ports:
@@ -20,3 +24,4 @@ services:
     depends_on:
       - mongo
       - redis
+      - metabase
