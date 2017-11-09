@@ -3,6 +3,8 @@ version: '3'
 services:
   metabase:
     image: metabase/metabase
+    volumes:
+      - .:/metabase.db
     ports:
       - "3000:3000"
   mongo:
