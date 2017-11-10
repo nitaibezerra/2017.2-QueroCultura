@@ -12,11 +12,14 @@ from .api_connections import RequestProjectsRawData
 from datetime import datetime
 from celery.decorators import task
 import json
+from space_indicators.views import populate_per_occupation_area
 
 DEFAULT_INITIAL_DATE = "2012-01-01 15:47:38.337553"
 
 
 def index(request):
+    # populate_per_occupation_area()
+
     per_type, per_online, temporal = load_last_registers()
 
     per_type = per_type.total_project_per_type
